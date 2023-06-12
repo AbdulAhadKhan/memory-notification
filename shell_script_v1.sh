@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MEMORY_LIMIT=${1:-"102400"}
+MEMORY_LIMIT=${1:-"82400"}
 SLEEP_DURATION=${2:-"1"}
 
 echo "Memory limit specified: $MEMORY_LIMIT"
