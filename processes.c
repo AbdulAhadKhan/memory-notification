@@ -20,6 +20,9 @@ int main() {
     signal(SIGINT, signalHandler); // Register the signal handler for Ctrl + C
 
     int numProcesses = 15; // Number of child processes to spawn
+    
+    printf("Parent process spawned %d child processes.\n", numProcesses);
+    printf("Press Ctrl + C to quit.\n");
 
     for (int i = 0; i < numProcesses; i++) {
         pid_t pid = fork();
@@ -49,8 +52,7 @@ int main() {
     }
 
     // Parent process
-    printf("Parent process spawned %d child processes.\n", numProcesses);
-    printf("Press Ctrl + C to quit.\n");
+    
 
     sleep(KEEP_ALIVE * 2);
 
@@ -58,7 +60,7 @@ int main() {
     for (int i = 0; i < numProcesses; i++) {
         kill(0, SIGTERM);
     }
-
+	sleep(1);
     printf("Parent process terminated.\n");
 
     return 0;
