@@ -17,6 +17,12 @@
 # they need to be tracked independently. While this is possible,
 # it is not the current goal of this script. This may change in
 # the future.
+# 
+# Possible policy when tracking processes individually:
+# If the process exceeds the lower limit and stays above the lower
+# limit for X period of time, email the admin immediately. If the
+# this process returns to normal before the X period of time,
+# operate as stated in policy 1.
 
 MEMORY_LIMIT=${1:-"82400"}
 SLEEP_DURATION=${2:-"1"}
