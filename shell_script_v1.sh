@@ -1,5 +1,23 @@
 #!/bin/bash
 
+# TODO: email the admin if the memory limit is exceeded
+# based on the defined policies.
+# 
+# Policies:
+# 1. If a process exceeds the lower limit, set the flag to 1.
+#    If the flag is already set to 1, ignore the process. Wait 
+#    for X period of time and then email the admin, and set the
+#    flag to 0.
+# 2. If a process exceeds the upper limit, email the admin
+#    immediately and set the flag to 0.
+# 
+# Why not check the flag before checking the memory limit?
+# Currently, individual processes are checked for memory limit.
+# To check if the processes stay above the lower limit, the
+# they need to be tracked independently. While this is possible,
+# it is not the current goal of this script. This may change in
+# the future.
+
 MEMORY_LIMIT=${1:-"82400"}
 SLEEP_DURATION=${2:-"1"}
 
