@@ -24,7 +24,7 @@
 # this process returns to normal before the X period of time,
 # operate as stated in policy 1.
 
-LOWER_LIMIT=5000
+LOWER_LIMIT=500000
 UPPER_LIMIT=3000000
 SLEEP_DURATION=${2:-"1"}
 
