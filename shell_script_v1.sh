@@ -50,7 +50,7 @@ while true; do
             if [[ $drs -gt $UPPER_LIMIT ]]; then
                 exceeded_processes="$exceeded_processes [exceeded upper limit]"
             fi
-		fi
+		else break; fi
 	done <<< $ps_output
 
     if [[ -n $exceeded_processes ]]; then
