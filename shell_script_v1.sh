@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source setting.sh
 # TODO: email the admin if the memory limit is exceeded
 # based on the defined policies.
 # 
@@ -24,9 +25,7 @@
 # this process returns to normal before the X period of time,
 # operate as stated in policy 1.
 
-LOWER_LIMIT=5000
-UPPER_LIMIT=3000000
-SLEEP_DURATION=${2:-"1"}
+
 
 function print_and_log() {
     echo -e "$1"
