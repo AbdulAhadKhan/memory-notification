@@ -13,18 +13,24 @@ void signalHandler(int signum) {
     exit(0);
 }
 
+void consumeMemory() {
+    while (1) {
+        int memorySize = rand() % UPPER_LIMIT + LOWER_LIMIT;
+        int *memory = (int *)malloc(memorySize * sizeof(int));
+
+        sleep(1);
+        free(memory);
+    }
+}
+
 void createChildProcesses(int level, int numProcesses) {
+    signal(SIGALRM, signalHandler);
+    alarm(30);
+
+    // Leaf process
     if (level >= numProcesses) {
-        // Leaf process
         printf("Leaf process (PID: %d) created.\n", getpid());
-
-        // Set the signal handler to terminate after 30 seconds
-        signal(SIGALRM, signalHandler);
-        alarm(30);
-
-        // Keep the process alive for 30 seconds
-        while (1) {
-        }
+        consumeMemory();
     }
 
     printf("Internal process (PID: %d) created two child processes:\n",
@@ -35,9 +41,8 @@ void createChildProcesses(int level, int numProcesses) {
         if (pid == 0) {
             // Child process
             srand(getpid());
-            int memorySize = rand() % UPPER_LIMIT + LOWER_LIMIT;
-            int *memory = (int *)malloc(memorySize * sizeof(int));
             createChildProcesses(level + 1, numProcesses);
+            consumeMemory();
             break;
         } else if (pid < 0) {
             fprintf(stderr, "Fork failed. Exiting.\n");
