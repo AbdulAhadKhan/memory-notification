@@ -5,8 +5,11 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-const int UPPER_LIMIT = (int)5e+8;
-const int LOWER_LIMIT = (int)1e+7;
+const long int MEMORY_CHOICE[] = {
+    (long int)2e+8,
+    (long int)8e+9,
+    (long int)2e+9,
+};
 
 void signalHandler(int signum) {
     // Terminate the process
@@ -15,11 +18,13 @@ void signalHandler(int signum) {
 
 void consumeMemory() {
     while (1) {
-        int memorySize = rand() % UPPER_LIMIT + LOWER_LIMIT;
-        int *memory = (int *)malloc(memorySize * sizeof(int));
+        long int memory = MEMORY_CHOICE[rand() % 3];
+        int *arr = (int *)malloc(memory);
 
+        printf("Process (PID: %d) allocated %ld bytes of memory.\n", getpid(),
+               memory);
         sleep(1);
-        free(memory);
+        free(arr);
     }
 }
 
